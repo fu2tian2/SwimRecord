@@ -7,28 +7,45 @@
 
 import UIKit
 
-class TimeRecorder: UIViewController {
+class TimeRecorder: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var timerVal: UILabel!
-    
-    var swimTimer = Timer()
-    var timerDisplayed = 0
+    @IBOutlet weak var recordTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         // if timer is running, make it stop.
-        
     }
     
-    func recordTime() {
-        //今inputしたい場所にstartTimer()で回ってるタイマーの値からサイクルとかで決まる値を引いて入力
+    //MARK: - UITableViewDelegate
+    
+    var records: [String] = []
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return records.count //seek how to change this into labelCnt in ViewController.swift
     }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: UITableViewCell = recordTableView.dequeueReusableCell(withIdentifier: "recordCell", for: indexPath)
+        
+        cell.textLabel!.text = records[indexPath.row]
+        
+        return cell
+    }
+    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        <#code#>
+//    }
+    
+//MARK: - Timer
+    
+    var swimTimer = Timer()
+    var timerDisplayed = 0
     
     @IBAction func startPressed(_ sender: UIButton) {
         swimTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(Action), userInfo: nil, repeats: true)
@@ -55,9 +72,4 @@ class TimeRecorder: UIViewController {
         timerVal.text = "\(String(min)):\(String(sec2))\(String(sec1)):\(String(msec2))\(String(msec1))"
     }
     
-    
-    
-    
-
-
 }

@@ -275,6 +275,20 @@ U3dpbSBQcmFjdGljZRERERER4oCoUmVjb3JkA
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2Ji-uT-sFl">
                                 <rect key="frame" x="0.0" y="241.5" width="414" height="654.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recordCell" id="H6B-vI-6aU">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="H6B-vI-6aU" id="tb3-i7-3yg">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="vZS-1y-5tD" id="M6r-qA-JOk"/>
+                                    <outlet property="delegate" destination="vZS-1y-5tD" id="52o-Da-UcA"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3aO-pb-abc"/>
@@ -292,6 +306,7 @@ U3dpbSBQcmFjdGljZRERERER4oCoUmVjb3JkA
                     </view>
                     <navigationItem key="navigationItem" id="FPj-kX-ie5"/>
                     <connections>
+                        <outlet property="recordTableView" destination="2Ji-uT-sFl" id="asm-Pi-LOG"/>
                         <outlet property="timerVal" destination="9xJ-oS-tqw" id="hPE-PG-CAJ"/>
                     </connections>
                 </viewController>
