@@ -9,6 +9,11 @@ import UIKit
 
 class TimeRecorder: UIViewController {
     
+    @IBOutlet weak var timerVal: UILabel!
+    
+    var swimTimer = Timer()
+    var timerDisplayed = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -21,13 +26,33 @@ class TimeRecorder: UIViewController {
         
     }
     
-    func startTimer(){
-        //timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: <#T##Selector#>, userInfo: <#T##Any?#>, repeats: <#T##Bool#>)
-        //run this func when start button is pressed.
-    }
-    
     func recordTime() {
         //今inputしたい場所にstartTimer()で回ってるタイマーの値からサイクルとかで決まる値を引いて入力
+    }
+    
+    @IBAction func startPressed(_ sender: UIButton) {
+        swimTimer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(Action), userInfo: nil, repeats: true)
+    }
+    
+    @IBAction func savePressed(_ sender: UIButton) {
+        swimTimer.invalidate()
+    }
+    
+    @objc func Action() {
+        timerDisplayed += 1
+        changeTimerVal()
+    }
+    
+    func changeTimerVal(){
+        let msec1 = timerDisplayed % 10
+        let ext1 = (timerDisplayed-msec1)/10
+        let msec2 = ext1 % 10
+        let ext2 = (ext1-msec2)/10
+        let sec1 = ext2 % 10
+        let ext3 = (ext2-sec1)/10
+        let sec2 = ext3 % 6
+        let min = (ext3-sec2)/6
+        timerVal.text = "\(String(min)):\(String(sec2))\(String(sec1)):\(String(msec2))\(String(msec1))"
     }
     
     
