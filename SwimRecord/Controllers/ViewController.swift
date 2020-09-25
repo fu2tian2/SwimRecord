@@ -7,15 +7,20 @@
 
 import UIKit
 
+//MARK: - common variables
+
+var meters = 200
+var reps = 3
+var swimmers = 4
+var cycles = 180
+var labelCnt = 1
+
 class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var metersTextField: UITextField!
     @IBOutlet weak var repsTextField: UITextField!
     @IBOutlet weak var numbersTextField: UITextField!
     @IBOutlet weak var cyclesTextField: UITextField!
-    
-    var labelCnt = 1
-    var cycles = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +34,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func startPressed(_ sender: UIButton) {
         // posess how many table views are required for the training menu
         getVal()
-        print(cycles)
-        print(labelCnt)
         self.performSegue(withIdentifier: "startToRecorder", sender: self)
     }
     
@@ -40,10 +43,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let numbersText: String = numbersTextField.text!
         let cyclesText: String = cyclesTextField.text!
         
-        labelCnt *= (Int(metersText)!/50)
-        labelCnt *= Int(repsText)!
-        labelCnt *= Int(numbersText)!
+        meters = Int(metersText)!
+        reps = Int(repsText)!
+        swimmers = Int(numbersText)!
         cycles = Int(cyclesText)!
+        
+        labelCnt *= (meters*reps*swimmers)/50
     }
     
     //MARK:- textFieldDelegate

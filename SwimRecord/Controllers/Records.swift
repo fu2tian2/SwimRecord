@@ -7,9 +7,11 @@
 
 import Foundation
 
-class Records {
-    var meters: Int = 0
-    var reps: Int = 0
-    var swimmers: Int = 0
-    var time: String = ""
+struct Records {
+    var nmeter: Int = 0
+    var nrep: Int = 0
+    var nswimmer: Int = 0
+    var startingTime: Int = 0
+    var ntime: String = ""
+    
 }
