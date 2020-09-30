@@ -8,10 +8,27 @@
 import Foundation
 
 struct Records {
-    var nmeter: Int = 0
-    var nrep: Int = 0
-    var nswimmer: Int = 0
-    var startingTime: Int = 0
-    var ntime: String = ""
+    let nMeter: Int
+    let nRep: Int
+    let nSwimmer: Int
+    let startingTime: Int
     
+    var nTime: Int?
+    
+    func displayer() -> String {
+        if let recordedTime = nTime {
+            if recordedTime < startingTime {
+                return "\(nRep)-\(nMeter)-\(nSwimmer) : Tapping too early!!"
+            } else {
+                let displayTime = changeTimerVal(mseconds: recordedTime-startingTime)
+                print(displayTime)
+                print(recordedTime)
+                print(startingTime)
+                return "\(nRep)-\(nMeter)-\(nSwimmer) : \(displayTime)"
+            }
+            
+        } else {
+            return "\(nRep)-\(nMeter)-\(nSwimmer) : Not yet recorded."
+        }
+    }
 }

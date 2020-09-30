@@ -7,13 +7,26 @@
 
 import UIKit
 
-//MARK: - common variables
+//MARK: - common variables and functions
 
 var meters = 200
 var reps = 3
 var swimmers = 4
 var cycles = 180
 var labelCnt = 1
+var divisor = 25
+
+func changeTimerVal(mseconds: Int) -> String{
+    let msec1 = mseconds % 10
+    let ext1 = (mseconds-msec1)/10
+    let msec2 = ext1 % 10
+    let ext2 = (ext1-msec2)/10
+    let sec1 = ext2 % 10
+    let ext3 = (ext2-sec1)/10
+    let sec2 = ext3 % 6
+    let min = (ext3-sec2)/6
+    return "\(String(min)):\(String(sec2))\(String(sec1)):\(String(msec2))\(String(msec1))"
+}
 
 class ViewController: UIViewController, UITextFieldDelegate {
     
@@ -48,8 +61,25 @@ class ViewController: UIViewController, UITextFieldDelegate {
         swimmers = Int(numbersText)!
         cycles = Int(cyclesText)!
         
-        labelCnt *= (meters*reps*swimmers)/50
+        labelCnt *= (meters*reps*swimmers)/divisor
     }
+    
+    //MARK: - 25m単位 or 50m単位
+    
+    @IBAction func segSelection(_ sender: UISegmentedControl) {
+        
+        switch sender.selectedSegmentIndex {
+            case 0:
+                divisor = 25
+            case 1:
+                divisor = 50
+            default:
+                divisor = 25
+        }
+    }
+    
+    
+    
     
     //MARK:- textFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool { //what to do just before return is pressed.
